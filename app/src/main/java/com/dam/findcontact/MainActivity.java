@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         if (!cursor.isClosed()) {
             cursor.close();
         }
-
         return contactName;
     }
 
@@ -90,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
             }
         }
-
         return photo;
     }
-
-
 }
