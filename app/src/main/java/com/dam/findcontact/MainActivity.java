@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
         String contactName = null;
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
         }
 
-        if(cursor != null && !cursor.isClosed()) {
+        if (!cursor.isClosed()) {
             cursor.close();
         }
 
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         contactNumber = Uri.encode(contactNumber);
         int phoneContactID = -1;
         Cursor contactLookupCursor = context.getContentResolver().query(Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, contactNumber),
-                new String[] { ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.PhoneLookup._ID }, null, null, null);
+                new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME, ContactsContract.PhoneLookup._ID}, null, null, null);
         while (contactLookupCursor.moveToNext()) {
             phoneContactID = contactLookupCursor.getInt(contactLookupCursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID));
         }
@@ -94,33 +94,5 @@ public class MainActivity extends AppCompatActivity {
         return photo;
     }
 
-//    public static Bitmap fetchContactPhotoFromPhoneNumber(Context context,
-//                                                          String phoneNumber) {
-//        long id = fetchContactIdFromPhoneNumber(context, phoneNumber);
-//        if (id == 0)
-//            return null;
-//        else {
-//            Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, id);
-//            InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(
-//                    context.getContentResolver(), uri);
-//            return input == null ? null : BitmapFactory.decodeStream(input);
-//        }
-//    }
-//
-//    public static long fetchContactIdFromPhoneNumber(Context context,
-//                                                     String phoneNumber) {
-//        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
-//                Uri.encode(phoneNumber));
-//        Cursor cursor = context.getContentResolver().query(uri,
-//                new String[] { ContactsContract.PhoneLookup._ID }, null, null, null);
-//
-//        long id = 0L;
-//        if (cursor.moveToFirst()) {
-//            id = cursor.getLong(cursor.getColumnIndex(ContactsContract.PhoneLookup._ID));
-//        }
-//        cursor.close();
-//
-//        return id;
-//
-//    }
+
 }
